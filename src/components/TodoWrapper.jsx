@@ -31,18 +31,21 @@ export const TodoWrapper = () => {
     const filteredTasks = showCompleted ? toDos.filter(todo => todo.completed) : toDos;
 
     return (
-        <div className="TodoWrapper">
-            <button onClick={() => setShowCompleted(!showCompleted)}>
-                {showCompleted ? 'Show All' : 'Show Completed'}
+        <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg">
+            <h1 className="text-2xl font-semibold text-center mb-4">Todo List</h1>
+            <button onClick={() => setShowCompleted(!showCompleted)} className="mb-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 w-full">
+                {showCompleted ? 'Show All Tasks' : 'Show Completed Tasks'}
             </button>
             <TodoForm addToDo={addToDo} />
-            {filteredTasks.map((todo) => (
-                todo.isEditing ? (
-                    <EditTodoForm editToDo={editTask} task={todo} key={todo.id} />
-                ) : (
-                    <Todo task={todo} toggleComplete={toggleComplete} deleteToDo={deleteToDo} editToDo={editToDo} key={todo.id} />
-                )
-            ))}
+            <div className="space-y-3 mt-4">
+                {filteredTasks.map((todo) => (
+                    todo.isEditing ? (
+                        <EditTodoForm editToDo={editTask} task={todo} key={todo.id} />
+                    ) : (
+                        <Todo task={todo} toggleComplete={toggleComplete} deleteToDo={deleteToDo} editToDo={editToDo} key={todo.id} />
+                    )
+                ))}
+            </div>
         </div>
     );
 };
